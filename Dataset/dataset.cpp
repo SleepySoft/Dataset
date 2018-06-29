@@ -89,8 +89,13 @@ void ObserverOrganizer::addUpdate(const std::string& key, const dw::any& value)
 
 void ObserverOrganizer::flushUpdatesToObservers()
 {
-	auto iter = m_updatesDict.begin();
-	for (; iter != m_updatesDict.end(); ++iter)
+    // To avoid recursive invoking
+
+    UPDATESDICT tempDict;
+    std::swap(tempDict, m_updatesDict);
+
+	auto iter = tempDict.begin();
+	for (; iter != tempDict.end(); ++iter)
 	{
 		IDataObserver* ob = (*iter).first;
 		DATALIST obUpdates = (*iter).second;
@@ -105,7 +110,6 @@ void ObserverOrganizer::flushUpdatesToObservers()
 			ob->onBatchDataChanged(obUpdates);
 		}
 	}
-	m_updatesDict.clear();
 }
 
 bool ObserverOrganizer::addObserverForKey(const std::string& key, IDataObserver* ob)

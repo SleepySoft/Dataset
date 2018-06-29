@@ -57,9 +57,12 @@ namespace dw {
 		{
 
 		}
-		data_wrapper(const char* val) : content(new data_holder< std::string >(std::string(val)))
+		data_wrapper(const char* val) : content(NULL)
 		{
-
+            if (val != NULL)
+            {
+                content = new data_holder< std::string >(std::string(val));
+            }
 		}
 		data_wrapper(const data_wrapper& rhs) : content(rhs.content != NULL ? rhs.content->clone() : NULL)
 		{
@@ -115,6 +118,25 @@ namespace dw {
 			swap(data_wrapper(t));
 			return true;
 		}
+        template< typename T >
+        bool check(const T& expect)
+        {
+            return ((type_info() == typeid(T) && value_as< T >() == expect));
+        }
+        bool check(const char* expect)
+        {
+            bool ret = false;
+            if (expect != NULL)
+            {
+                std::string val = std::string(expect);
+                ret = check(val);
+            }
+            else
+            {
+                ret = (!valid());
+            }
+            return ret;
+        }
 
 		template< typename T >
 		T* pointer_as()

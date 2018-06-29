@@ -371,3 +371,126 @@ TEST(Dataset_Test, MultiDataUpdateTest)
 	ob_456->m_batChangedData.clear();
 	ob_234->m_batChangedData.clear();
 }
+
+TEST(Dataset_Test, DatasetCheckTest)
+{
+    Dataset ds;
+
+    // Const data [type] + c
+
+    char cc = 'a';
+    unsigned char ucc = 'b';
+
+    const int8_t i8c = -100;
+    const uint8_t u8c = 254;
+
+    const int16_t i16c = -222;
+    const uint16_t u16c = 333;
+
+    const int32_t i32c = -4444;
+    const uint32_t u32c = 5555;
+
+    const int64_t i64c = -666666;
+    const uint64_t u64c = 299792458;
+
+    const float fc = 3.14159f;
+    const double dc = 6.62607004;
+
+    const char* csc = "SleepySoft";
+    std::string ssc = "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks";
+
+    // Any data [type] + a
+
+    dw::any ca(cc);
+    dw::any uca(ucc);
+
+    dw::any i8a(i8c);
+    dw::any u8a(u8c);
+
+    dw::any i16a(i16c);
+    dw::any u16a(u16c);
+
+    dw::any i32a(i32c);
+    dw::any u32a(u32c);
+
+    dw::any i64a(i64c);
+    dw::any u64a(u64c);
+
+    dw::any fa(fc);
+    dw::any da(dc);
+
+    dw::any csa(csc);
+    dw::any ssa(ssc);
+
+    // Set to dataset
+
+    ASSERT_TRUE(ds.set("ca", ca));
+    ASSERT_TRUE(ds.set("uca", uca));
+
+    ASSERT_TRUE(ds.set("i8a", i8a));
+    ASSERT_TRUE(ds.set("u8a", u8a));
+
+    ASSERT_TRUE(ds.set("i16a", i16a));
+    ASSERT_TRUE(ds.set("u16a", u16a));
+
+    ASSERT_TRUE(ds.set("i32a", i32a));
+    ASSERT_TRUE(ds.set("u32a", u32a));
+
+    ASSERT_TRUE(ds.set("i64a", i64a));
+    ASSERT_TRUE(ds.set("u64a", u64a));
+
+    ASSERT_TRUE(ds.set("fa", fc));
+    ASSERT_TRUE(ds.set("da", dc));
+
+    ASSERT_TRUE(ds.set("csa", csa));
+    ASSERT_TRUE(ds.set("ssa", ssa));
+
+    // Verify with const value
+
+    EXPECT_TRUE(ds.check("ca", cc));
+    EXPECT_TRUE(ds.check("uca", ucc));
+
+    EXPECT_TRUE(ds.check("i8a", i8c));
+    EXPECT_TRUE(ds.check("u8a", u8c));
+
+    EXPECT_TRUE(ds.check("i16a", i16c));
+    EXPECT_TRUE(ds.check("u16a", u16c));
+
+    EXPECT_TRUE(ds.check("i32a", i32c));
+    EXPECT_TRUE(ds.check("u32a", u32c));
+
+    EXPECT_TRUE(ds.check("i64a", i64c));
+    EXPECT_TRUE(ds.check("u64a", u64c));
+
+    EXPECT_TRUE(ds.check("fa", fc));
+    EXPECT_TRUE(ds.check("da", dc));
+
+    EXPECT_TRUE(ds.check("csa", csc));
+    EXPECT_TRUE(ds.check("ssa", ssc));
+
+    EXPECT_TRUE(ds.check("csa", "SleepySoft"));
+    EXPECT_TRUE(ds.check("ssa", "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks"));
+
+    // Verify with 'any' data
+
+    //EXPECT_TRUE(ds.check("ca", ca));
+    //EXPECT_TRUE(ds.check("uca", uca));
+
+    //EXPECT_TRUE(ds.check("i8a", i8a));
+    //EXPECT_TRUE(ds.check("u8a", u8a));
+
+    //EXPECT_TRUE(ds.check("i16a", i16a));
+    //EXPECT_TRUE(ds.check("u16a", u16a));
+
+    //EXPECT_TRUE(ds.check("i32a", i32a));
+    //EXPECT_TRUE(ds.check("u32a", u32a));
+
+    //EXPECT_TRUE(ds.check("i64a", i64a));
+    //EXPECT_TRUE(ds.check("u64a", u64a));
+
+    //EXPECT_TRUE(ds.check("fa", fa));
+    //EXPECT_TRUE(ds.check("da", da));
+
+    //EXPECT_TRUE(ds.check("csa", csa));
+    //EXPECT_TRUE(ds.check("ssa", ssa));
+}

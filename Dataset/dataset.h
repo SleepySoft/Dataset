@@ -81,6 +81,22 @@ public:
 	bool get(std::string key, dw::any& value) const;
 	bool set(std::string key, const dw::any& value);
 
+    template< typename T >
+    bool check(std::string key, const T& expect) const
+    {
+        dw::any value;
+        bool ret = get(key, value);
+        ret = ret && value.check< T >(expect);
+        return ret;
+    }
+    bool check(std::string key, const char* expect) const
+    {
+        dw::any value;
+        bool ret = get(key, value);
+        ret = ret && value.check(expect);
+        return ret;
+    }
+
 	DATADICT gets(std::vector< std::string > keys);
 	void sets(const DATADICT& values);
 

@@ -43,6 +43,8 @@ TEST(data_wrapper_Test, SetAndGetConstTypes)
 
 TEST(data_wrapper_Test, SetAndGetStrictTypes)
 {
+    // Const data [type] + c
+
 	char cc = 'a';
 	unsigned char ucc = 'b';
 
@@ -64,6 +66,8 @@ TEST(data_wrapper_Test, SetAndGetStrictTypes)
 	const char* csc = "SleepySoft";
 	std::string ssc = "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks";
 
+    // Any data [type] + a
+
 	dw::any ca(cc);
 	dw::any uca(ucc);
 
@@ -84,6 +88,10 @@ TEST(data_wrapper_Test, SetAndGetStrictTypes)
 
 	dw::any csa(csc);
 	dw::any ssa(ssc);
+
+    // verify
+    // [type] + p: pointer
+    // [type] + v: value
 
 	char* cp = ca.pointer_as< char >();
 	char ucv = uca.value_as< unsigned char >();
@@ -167,4 +175,91 @@ TEST(data_wrapper_Test, SetAndGetWrongTypes)
 
 	EXPECT_EQ(NULL, ssp);
 	EXPECT_EQ(std::string("error"), ssv);
+}
+
+TEST(data_wrapper_Test, CheckFunctionTest)
+{
+    // Const data [type] + c
+
+    char cc = 'a';
+    unsigned char ucc = 'b';
+
+    const int8_t i8c = -100;
+    const uint8_t u8c = 254;
+
+    const int16_t i16c = -222;
+    const uint16_t u16c = 333;
+
+    const int32_t i32c = -4444;
+    const uint32_t u32c = 5555;
+
+    const int64_t i64c = -666666;
+    const uint64_t u64c = 299792458;
+
+    const float fc = 3.14159f;
+    const double dc = 6.62607004;
+
+    const char* csc = "SleepySoft";
+    std::string ssc = "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks";
+
+    // Any data [type] + a
+
+    dw::any ca(cc);
+    dw::any uca(ucc);
+
+    dw::any i8a(i8c);
+    dw::any u8a(u8c);
+
+    dw::any i16a(i16c);
+    dw::any u16a(u16c);
+
+    dw::any i32a(i32c);
+    dw::any u32a(u32c);
+
+    dw::any i64a(i64c);
+    dw::any u64a(u64c);
+
+    dw::any fa(fc);
+    dw::any da(dc);
+
+    dw::any csa(csc);
+    dw::any ssa(ssc);
+
+    // Verify
+
+    EXPECT_TRUE(ca.check(cc));
+    EXPECT_TRUE(uca.check(ucc));
+
+    EXPECT_TRUE(i8a.check(i8c));
+    EXPECT_TRUE(u8a.check(u8c));
+
+    EXPECT_TRUE(i16a.check(i16c));
+    EXPECT_TRUE(u16a.check(u16c));
+
+    EXPECT_TRUE(i32a.check(i32c));
+    EXPECT_TRUE(u32a.check(u32c));
+
+    EXPECT_TRUE(i64a.check(i64c));
+    EXPECT_TRUE(u64a.check(u64c));
+
+    EXPECT_TRUE(fa.check(fc));
+    EXPECT_TRUE(da.check(dc));
+
+    EXPECT_TRUE(csa.check(csc));
+    EXPECT_TRUE(ssa.check(ssc));
+
+    EXPECT_TRUE(csa.check("SleepySoft"));
+    EXPECT_TRUE(ssa.check("The Times 03/Jan/2009 Chancellor on brink of second bailout for banks"));
+}
+
+TEST(data_wrapper_Test, CheckSpecialCase)
+{
+    dw::any invalid((const char*)NULL);
+    EXPECT_FALSE(invalid.valid());
+
+    dw::any null;
+    EXPECT_TRUE(null.check((const char*)NULL));
+
+    dw::any str("Sleepy");
+    EXPECT_FALSE(str.check((const char*)NULL));
 }

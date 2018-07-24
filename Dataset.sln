@@ -10,6 +10,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DatasetTest", "DatasetTest\
 		{11608349-7D9D-4C86-80EB-1D011A87EC86} = {11608349-7D9D-4C86-80EB-1D011A87EC86}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Persistence", "Persistence\Persistence.vcxproj", "{7D82888E-AB51-407D-9C9A-C989FFCC1A92}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -34,6 +36,14 @@ Global
 		{57177C1A-AA42-44EE-8A6E-E3D5B8E95FD3}.Release|x64.Build.0 = Release|x64
 		{57177C1A-AA42-44EE-8A6E-E3D5B8E95FD3}.Release|x86.ActiveCfg = Release|Win32
 		{57177C1A-AA42-44EE-8A6E-E3D5B8E95FD3}.Release|x86.Build.0 = Release|Win32
+		{7D82888E-AB51-407D-9C9A-C989FFCC1A92}.Debug|x64.ActiveCfg = Debug|x64
+		{7D82888E-AB51-407D-9C9A-C989FFCC1A92}.Debug|x64.Build.0 = Debug|x64
+		{7D82888E-AB51-407D-9C9A-C989FFCC1A92}.Debug|x86.ActiveCfg = Debug|Win32
+		{7D82888E-AB51-407D-9C9A-C989FFCC1A92}.Debug|x86.Build.0 = Debug|Win32
+		{7D82888E-AB51-407D-9C9A-C989FFCC1A92}.Release|x64.ActiveCfg = Release|x64
+		{7D82888E-AB51-407D-9C9A-C989FFCC1A92}.Release|x64.Build.0 = Release|x64
+		{7D82888E-AB51-407D-9C9A-C989FFCC1A92}.Release|x86.ActiveCfg = Release|Win32
+		{7D82888E-AB51-407D-9C9A-C989FFCC1A92}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

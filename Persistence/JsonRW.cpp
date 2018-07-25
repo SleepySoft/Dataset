@@ -303,6 +303,51 @@ namespace persist
         return (!isNil()) && (!isDict()) && (!isArray());
     }
 
+
+    bool JsonRW::isInt32() const
+    {
+        const ReadContext& ctx = m_readContexts.back();
+        return (ctx.accessingValue != NULL) && ctx.accessingValue->IsInt();
+    }
+    bool JsonRW::isUint32() const
+    {
+        const ReadContext& ctx = m_readContexts.back();
+        return (ctx.accessingValue != NULL) && ctx.accessingValue->IsUint();
+    }
+
+    bool JsonRW::isInt64() const
+    {
+        const ReadContext& ctx = m_readContexts.back();
+        return (ctx.accessingValue != NULL) && ctx.accessingValue->IsInt64();
+    }
+    bool JsonRW::isUint64() const
+    {
+        const ReadContext& ctx = m_readContexts.back();
+        return (ctx.accessingValue != NULL) && ctx.accessingValue->IsUint64();
+    }
+
+    bool JsonRW::isFloat() const
+    {
+        const ReadContext& ctx = m_readContexts.back();
+        return (ctx.accessingValue != NULL) && ctx.accessingValue->IsFloat();
+    }
+    bool JsonRW::isDouble() const
+    {
+        const ReadContext& ctx = m_readContexts.back();
+        return (ctx.accessingValue != NULL) && ctx.accessingValue->IsDouble();
+    }
+
+    bool JsonRW::isBool() const
+    {
+        const ReadContext& ctx = m_readContexts.back();
+        return (ctx.accessingValue != NULL) && ctx.accessingValue->IsBool();
+    }
+    bool JsonRW::isString() const
+    {
+        const ReadContext& ctx = m_readContexts.back();
+        return (ctx.accessingValue != NULL) && ctx.accessingValue->IsString();
+    }
+
     bool JsonRW::readVal(int32_t& val) const
     {
         bool ret = false;

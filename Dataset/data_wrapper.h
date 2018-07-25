@@ -104,7 +104,7 @@ namespace dw {
         // Template operation
 
         template< typename T >
-        bool istype()
+        bool istype() const
         {
             data_holder< T >* holder = dynamic_cast<data_holder< T >*>(content);
             return (holder != NULL);
@@ -147,20 +147,20 @@ namespace dw {
         }
 
         template< typename T >
-        T* pointer_as()
+        T* pointer_as() const
         {
             return ((content != NULL) && (content->type_info() == typeid(T))) ?
                 &(static_cast<data_holder< T >*>(content))->value : NULL;
         }
 
         template< typename T >
-        T value_as()
+        T value_as() const
         {
             return value_as(T());
         }
 
         template< typename T >
-        T value_as(T default_val)
+        T value_as(T default_val) const
         {
             T* val = pointer_as< T >();
             return (val != NULL ? (*val) : default_val);

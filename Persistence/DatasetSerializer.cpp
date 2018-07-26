@@ -69,6 +69,8 @@ bool DatasetSerializer::deserialize(Dataset* dataset, persist::Reader* reader)
                 {
                     // If data exists, type specified.
                     dw::any existed = dataset->get(*iter);
+                    ambiguous::copy(any, existed);
+                    dataset->set((*iter), existed);
                 }
                 else
                 {

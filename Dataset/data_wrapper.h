@@ -111,16 +111,16 @@ namespace dw {
         }
 
         template< typename T >
-        bool set(T t)
+        bool set(T val)
         {
             data_holder< T >* holder = dynamic_cast<data_holder< T >*>(content);
-            if (holder != NULL) { holder->set(t); return true; }
+            if (holder != NULL) { holder->value = val; return true; }
             else { return false; }
         }
 
-        bool set(const data_wrapper& t)
+        bool set(const data_wrapper& val)
         {
-            data_wrapper dw(t);
+            data_wrapper dw(val);
             swap(dw);
             return true;
         }

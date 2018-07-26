@@ -12,7 +12,7 @@ namespace persist
         m_scopeStack.push(SCP_NIL);
 
         m_readContexts.push_back(ReadContext());
-        m_readContexts.back().operatingValue = &m_doc;
+        m_readContexts.back().accessingValue = &m_doc;
     }
 
     JsonRW::~JsonRW()
@@ -25,6 +25,11 @@ namespace persist
     {
         m_buffer.Clear();
         m_writer.Reset(m_buffer);
+
+        m_nextExpect = EXP_VAL;
+        m_scopeStack.swap(scopeStack());
+        m_scopeStack.push(SCP_NIL);
+
         return true;
     }
     const char* JsonRW::getDoc() const
@@ -155,11 +160,11 @@ namespace persist
 
     bool JsonRW::writeVal(const char* val)
     {
-        return (checkPutTip(std::cout, __FUNCTION__, __LINE__) && m_writer.String(val));
+        return (checkPutTip(std::cout, __FUNCTION__, __LINE__) && m_writer.String(val) && afterPut());
     }
     bool JsonRW::writeVal(const std::string& val)
     {
-        return (checkPutTip(std::cout, __FUNCTION__, __LINE__) && m_writer.String(val.c_str(), val.size(), true));
+        return (checkPutTip(std::cout, __FUNCTION__, __LINE__) && m_writer.String(val.c_str(), val.size(), true) && afterPut());
     }
 
     bool JsonRW::writeVal(const void* val)
@@ -201,19 +206,20 @@ namespace persist
 
     bool JsonRW::parseDoc(std::string doc)
     {
-        return m_doc.Parse(doc.c_str()).HasParseError();
+        return !m_doc.Parse(doc.c_str()).HasParseError();
     }
 
     bool JsonRW::into()
     {
         bool ret = false;
-        ReadContext& ctx = m_readContexts.back();
+        ReadContext ctx = m_readContexts.back();
 
         if (ctx.accessingValue != NULL &&
             (ctx.accessingValue->IsObject() ||
              ctx.accessingValue->IsArray()))
         {
             m_readContexts.push_back(ReadContext());
+            m_readContexts.back().operatingValue = ctx.accessingValue;
             ret = true;
         }
         return ret;
@@ -257,6 +263,13 @@ namespace persist
             ret = true;
         }
         return ret;
+    }
+    bool JsonRW::rewind()
+    {
+        m_readContexts.clear();
+        m_readContexts.push_back(ReadContext());
+        m_readContexts.back().accessingValue = &m_doc;
+        return true;
     }
 
     unsigned int JsonRW::size() const

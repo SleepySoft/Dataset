@@ -38,6 +38,7 @@ namespace ambiguous
     template< typename T >
     bool get(const dw::any& any, T& data)
     {
+        CHECK_CAST_GET(char);
         CHECK_CAST_GET(bool);
         CHECK_CAST_GET(float);
         CHECK_CAST_GET(double);
@@ -64,6 +65,7 @@ namespace ambiguous
     template< typename T >
     bool set(dw::any& any, const T& data)
     {
+        CHECK_CAST_SET(char);
         CHECK_CAST_SET(bool);
         CHECK_CAST_SET(float);
         CHECK_CAST_SET(double);
@@ -100,6 +102,7 @@ namespace ambiguous
         else /*if (isArithmetic(any1.type_info()) && 
                  isArithmetic(any2.type_info()))*/
         {
+            CHECK_CAST_GETSET(char);
             CHECK_CAST_GETSET(bool);
             CHECK_CAST_GETSET(float);
             CHECK_CAST_GETSET(double);

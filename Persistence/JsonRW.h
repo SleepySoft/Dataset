@@ -55,6 +55,7 @@ namespace persist
         typedef std::vector< ReadContext > readContexts;
 
     protected:
+        // Resource
         jsonDoc m_doc;
         jsonBuffer m_buffer;
         jsonWriter m_writer;
@@ -114,6 +115,7 @@ namespace persist
         virtual bool upto();
         virtual bool seek(const char* key);
         virtual bool seek(unsigned int index);
+        virtual bool rewind();
 
         virtual unsigned int size() const;
         virtual std::vector< std::string > keys() const;
@@ -123,17 +125,17 @@ namespace persist
         virtual bool isArray() const;
         virtual bool isSimple() const;
 
-        virtual bool isInt32() const = 0;
-        virtual bool isUint32() const = 0;
+        virtual bool isInt32() const;
+        virtual bool isUint32() const;
 
-        virtual bool isInt64() const = 0;
-        virtual bool isUint64() const = 0;
+        virtual bool isInt64() const;
+        virtual bool isUint64() const;
 
-        virtual bool isFloat() const = 0;
-        virtual bool isDouble() const = 0;
+        virtual bool isFloat() const;
+        virtual bool isDouble() const;
 
-        virtual bool isBool() const = 0;
-        virtual bool isString() const = 0;
+        virtual bool isBool() const;
+        virtual bool isString() const;
 
         virtual bool readVal(int32_t& val) const;
         virtual bool readVal(uint32_t& val) const;

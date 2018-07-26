@@ -8,9 +8,13 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DatasetTest", "DatasetTest\DatasetTest.vcxproj", "{57177C1A-AA42-44EE-8A6E-E3D5B8E95FD3}"
 	ProjectSection(ProjectDependencies) = postProject
 		{11608349-7D9D-4C86-80EB-1D011A87EC86} = {11608349-7D9D-4C86-80EB-1D011A87EC86}
+		{7D82888E-AB51-407D-9C9A-C989FFCC1A92} = {7D82888E-AB51-407D-9C9A-C989FFCC1A92}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Persistence", "Persistence\Persistence.vcxproj", "{7D82888E-AB51-407D-9C9A-C989FFCC1A92}"
+	ProjectSection(ProjectDependencies) = postProject
+		{11608349-7D9D-4C86-80EB-1D011A87EC86} = {11608349-7D9D-4C86-80EB-1D011A87EC86}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

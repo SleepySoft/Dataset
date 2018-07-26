@@ -49,8 +49,6 @@ namespace persist
         virtual bool writeVal(const std::string& val) = 0;
 
         virtual bool writeVal(const void* val) = 0;
-
-        virtual bool writeDoc(const char* doc) = 0;
     };
     class Reader
     {
@@ -64,6 +62,7 @@ namespace persist
         virtual bool upto() = 0;
         virtual bool seek(const char* key) = 0;
         virtual bool seek(unsigned int index) = 0;
+        virtual bool rewind() = 0;
 
         virtual unsigned int size() const = 0;
         virtual std::vector< std::string > keys() const = 0;

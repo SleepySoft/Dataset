@@ -114,6 +114,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AutoRegFactory.h" />
     <ClInclude Include="DatasetSerializer.h" />
     <ClInclude Include="Interface.h" />
     <ClInclude Include="JsonRW.h" />

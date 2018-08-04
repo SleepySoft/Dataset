@@ -132,9 +132,6 @@
     <ClInclude Include="DatasetSerializer.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="AutoRegFactory.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="JsonRW.cpp">
